@@ -39,9 +39,7 @@ build/Release
 
 # Dependency directories
 node_modules/
-package-lock.json/
 jspm_packages/
-*-lock.json/
 
 # TypeScript v1 declaration files
 typings/
@@ -105,7 +103,10 @@ dist
 # TernJS port file
 .tern-port
 
-.env
-dist
 *-lock.json
-.txt
+trail.json
+trail.txt
+trail.js
+/src/dataFilter.js
+.js
+proxy.js

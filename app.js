@@ -8,7 +8,6 @@ const sleep = async function (seconds) {
 }
 
 // Function to Open the Proxy list page
-//
 const getProxyList = async function (params) {
     params.url = params.url || '';
 

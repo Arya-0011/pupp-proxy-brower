@@ -2,15 +2,18 @@
   "name": "pupp-proxy",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "e-invoice.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon e-invoice.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.2.0",
     "puppeteer": "^19.2.0"
   },
   "devDependencies": {

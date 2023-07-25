@@ -1,13 +1,17 @@
 const { Octokit } = require('@octokit/rest');
 
 const accessToken = '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';
-const owner = 'arya011tp';
 const octokit = new Octokit({ auth: accessToken });
 
 async function deleteOldBranches() {
     try {
+        const user = await octokit.users.getAuthenticated();
+
+        const owner = user.data.login;
+
         const repos = await octokit.repos.listForUser({ username: owner });
-        console.log(repos)
+        console.log(repos);
+
         const currentDate = new Date();
         const sixMonthsAgo = new Date();
         sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);

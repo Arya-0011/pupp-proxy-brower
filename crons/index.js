@@ -1,5 +1,5 @@
 const { checkOpenPRs } = require("./github/emailPendingPRs");
-const { deleteStaleBranches } = require('./github/deleteStaleBranches')
+const { deleteOldBranches } = require('./github/deleteStaleBranches')
 
 checkOpenPRs();
-deleteStaleBranches()
+deleteOldBranches()

@@ -1,4 +1,3 @@
-// Assuming you have made the changes to the GithubService class as mentioned in the previous response.
 
 const GithubService = require("./githubService");
 const EmailService = require("./reminderService");
@@ -8,7 +7,6 @@ async function checkOpenPRs() {
         const githubService = new GithubService("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");
         const emailService = new EmailService();
         const userRepos = await githubService.getAuthenticatedUserRepos();
-        // console.log(userRepos)
         const currentDate = new Date();
 
         for (const repo of userRepos) {

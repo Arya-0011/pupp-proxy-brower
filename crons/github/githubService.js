@@ -16,6 +16,17 @@ class GithubService {
         }
     }
 
+    async getOrganizationDetails(orgName) {
+        try {
+            const { data: organization } = await this.octokit.orgs.get({
+                org: orgName,
+            });
+            return organization;
+        } catch (error) {
+            throw new Error(`Error fetching organization details for ${orgName}: ${error.message}`);
+        }
+    }
+
     async getOpenPullRequests(owner, repoName) {
         try {
             const { data: pullRequests } = await this.octokit.pulls.list({
@@ -32,10 +43,34 @@ class GithubService {
     async getUserEmails() {
         try {
             const { data: userEmails } = await this.octokit.users.listEmailsForAuthenticatedUser();
-            console.log(userEmails);
             return userEmails;
         } catch (error) {
             throw new Error("Error fetching user emails:", error);
+        }
+    }
+
+    async getOrganizationRepos(orgName) {
+        try {
+            const { data: orgRepos } = await this.octokit.repos.listForOrg({
+                org: orgName,
+            });
+            return orgRepos;
+        } catch (error) {
+            throw new Error(`Error fetching organization repositories for ${orgName}: ${error.message}`);
+        }
+    }
+
+    async getPullRequestCreatorEmail(username) {
+        try {
+            const { data: userEmails } = await this.octokit.users.listEmailsForAuthenticatedUser({
+                username,
+            });
+
+            // Assuming the first email in the userEmails array is the primary email
+            const creatorEmail = userEmails[0]?.email;
+            return creatorEmail;
+        } catch (error) {
+            throw new Error(`Error fetching user emails for ${username}: ${error.message}`);
         }
     }
 
@@ -60,6 +95,19 @@ class GithubService {
             });
         } catch (error) {
             throw new Error(`Error deleting branch ${branchName} from ${owner}/${repoName}: ${error.message}`);
+        }
+    }
+
+    async getBranchCommitInfo(owner, repoName, branchName) {
+        try {
+            const { data: commit } = await this.octokit.repos.getBranch({
+                owner,
+                repo: repoName,
+                branch: branchName,
+            });
+            return commit.commit;
+        } catch (error) {
+            throw new Error(`Error fetching commit information for branch ${branchName} in ${owner}/${repoName}: ${error.message}`);
         }
     }
 }
